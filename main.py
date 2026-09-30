@@ -1,8 +1,7 @@
 from fastapi import FastAPI
+from backend.routes import router
 from fastapi.responses import FileResponse
 
 app = FastAPI()
 
-@app.get('/', response_class=FileResponse)
-async def home():
-     return FileResponse("frontend/home.html")
+app.include_router(router)
