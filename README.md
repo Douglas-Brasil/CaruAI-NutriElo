@@ -27,13 +27,25 @@ A ideia é contribuir para uma rede sustentável de apoio familiar, tornando o p
 
 O projeto é desenvolvido utilizando as seguintes tecnologias:
 
-| Tecnologia     | Utilização                                             |
-| -------------- | ------------------------------------------------------ |
-| **PHP**        | Desenvolvimento da lógica e funcionalidades do sistema |
-| **Supabase**   | Banco de dados e serviços de backend                   |
-| **HTML5**      | Estrutura das páginas                                  |
-| **CSS3**       | Estilização e layout da aplicação                      |
-| **JavaScript** | Interatividade e funcionalidades dinâmicas             |
+| Tecnologia                | Utilização                                   |
+| ------------------------- | -------------------------------------------- |
+| **React / Next.js**       | Interface web (frontend)                     |
+| **Python**                | API e regras de negócio (backend)            |
+| **Supabase**              | Banco de dados e serviços de backend         |
+
+## 🗂️ Estrutura do repositório
+
+O projeto é um **monorepo**: frontend e backend ficam no mesmo repositório, cada um na sua pasta.
+
+```
+CaruAI-NutriElo/
+├── frontend/     # Aplicação web (React ou Next.js)
+├── backend/      # API em Python
+├── supabase/     # Migrations SQL do banco de dados
+└── docs/         # Documentação e protótipos de telas
+```
+
+Cada pasta tem seu próprio `README.md` explicando como rodar aquela parte.
 
 ## 📋 Funcionalidades
 
