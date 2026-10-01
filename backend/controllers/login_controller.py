@@ -59,3 +59,20 @@ def login_user(email: str, password: str) -> RedirectResponse:
     )
 
     return response
+
+
+def logout_user() -> RedirectResponse:
+    # 1. Encerra a sessão no Supabase
+    Login.logout()
+
+    # 2. Cria a resposta de redirecionamento para a página de login
+    response = RedirectResponse(url="/login", status_code=303)
+
+    # 3. Remove o cookie de acesso do navegador definindo max_age=0
+    response.delete_cookie(
+        key="access_token",
+        httponly=True,
+        samesite="lax"
+    )
+
+    return response

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, Request, Response, status, Form
 from fastapi.responses import FileResponse, RedirectResponse
 from backend.controllers.home_controller import get_home_page
-from backend.controllers.login_controller import get_login_page, register_user, login_user
+from backend.controllers.login_controller import get_login_page, register_user, login_user, logout_user
 from backend.controllers.auth_controller import Controller_Auth
 from backend.models.base_model import UserRegisterSchema
 
@@ -38,3 +38,8 @@ def register(email: str = Form(...), password: str = Form(...)):
 def login(email: str = Form(...), password: str = Form(...)):
     print("\033[41m ROTA POST DE LOGAR \033[0m")
     return login_user(email=email, password=password)
+
+@router.post("/login/logout")
+def logout():
+    print("\033[41m ROTA DE DESLOGAR \033[0m")
+    return logout_user()

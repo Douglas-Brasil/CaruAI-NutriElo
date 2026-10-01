@@ -51,3 +51,13 @@ class Login:
           except Exception as e:
                print(f"\033[41m ERRO NO LOGIN: {str(e)} \033[0m")
                return {"success": False, "error": str(e)}
+          
+     @staticmethod
+     def logout() -> dict:
+          try:
+               supabase.auth.sign_out()
+               print(f"\033[43m USUÁRIO DESLOGADO \033[0m")
+               return {"success": True, "message": "Logout realizado com sucesso!"}
+          except Exception as e:
+               print(f"\033[41m ERRO NO LOGOUT: {str(e)} \033[0m")
+               return {"success": False, "error": str(e)}
