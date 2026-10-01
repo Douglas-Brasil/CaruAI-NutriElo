@@ -27,3 +27,27 @@ class Login:
           except Exception as e:
                print(f"\033[44m {str(e)} \033[0m")
                return {"success": False, "error": str(e)}
+          
+     @staticmethod
+     def authenticate(user: User) -> dict:
+          try:
+               # Autentica o usuário com e-mail e senha no Supabase
+               response = supabase.auth.sign_in_with_password({
+                    "email": user.get_email(),
+                    "password": user.get_password()
+               })
+
+               if response.user and response.session:
+                    print(f"\033[42m USUÁRIO AUTENTICADO \033[0m")
+                    return {
+                    "success": True,
+                    "user": response.user,
+                    "session": response.session,
+                    "message": "Login realizado com sucesso!"
+                    }
+
+               return {"success": False, "error": "Credenciais inválidas."}
+
+          except Exception as e:
+               print(f"\033[41m ERRO NO LOGIN: {str(e)} \033[0m")
+               return {"success": False, "error": str(e)}
