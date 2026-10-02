@@ -1,30 +1,258 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>login</title>
+     <title>Entrar · NutriElo</title>
+     <link rel="stylesheet" href="/static/css/organic.css">
+     <style>
+          body { margin: 0; text-wrap: pretty; overflow-x: clip; background: var(--color-bg); }
+          a { color: var(--color-accent-700); }
+          a:hover { color: var(--color-accent-800); }
+          [hidden] { display: none !important; }
+
+          .page { font-family: var(--font-body); color: var(--color-text); background: var(--color-bg); min-height: 100vh; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); }
+          .main { display: flex; flex-direction: column; padding: 28px clamp(20px, 5vw, 72px) 40px; }
+          .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--color-text); font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 22px; align-self: flex-start; }
+          .brand:hover { color: var(--color-text); }
+          .brand-mark { width: 26px; height: 26px; border-radius: 50%; background: var(--color-accent); display: inline-block; box-shadow: 12px 0 0 -2px var(--color-accent-2); }
+          .content { flex: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; max-width: 420px; padding: 56px 0; }
+          .title { font-size: clamp(34px, 4vw, 46px); line-height: 1.08; margin: 0 0 0 -0.028em; }
+          .lead { font-size: 16px; line-height: 1.65; margin: 14px 0 0; color: color-mix(in srgb, var(--color-text) 80%, transparent); }
+          .seg { background: var(--color-surface); margin-top: 28px; align-self: flex-start; }
+          .seg-opt { padding: 10px 18px; font-size: 14px; }
+          form { display: flex; flex-direction: column; gap: 18px; margin-top: 28px; }
+          .field { display: flex; flex-direction: column; gap: 6px; }
+          .field > label, .field-label { font-size: 14px; font-weight: 600; margin: 0; color: var(--color-text); }
+          .field-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+          .field-head a { font-size: 14px; }
+          .input { min-height: 46px; }
+          .pw-wrap { position: relative; display: flex; }
+          .pw-wrap .input { flex: 1; padding-right: 52px; }
+          .pw-toggle { position: absolute; right: 4px; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; padding: 0; display: grid; place-items: center; }
+          .pw-toggle[aria-pressed="true"] svg .slash { display: inline; }
+          .pw-toggle svg .slash { display: none; }
+          .remember { font-size: 14px; gap: 10px; align-self: flex-start; }
+          .remember .dot { border-radius: 6px; }
+          .msg { margin: 0; padding: 12px 16px; border-radius: var(--radius-md); font-size: 14px; line-height: 1.5; }
+          .msg-error { background: var(--color-accent-100); color: var(--color-accent-800); }
+          .msg-notice { background: var(--color-accent-2-100); color: var(--color-accent-2-800); }
+          .submit { min-height: 48px; font-size: 15px; margin-top: 4px; }
+          .switch { font-size: 15px; line-height: 1.6; margin: 28px 0 0; color: color-mix(in srgb, var(--color-text) 80%, transparent); }
+          .switch a { font-weight: 600; }
+          .foot { font-size: 13px; margin: 0; color: color-mix(in srgb, var(--color-text) 70%, transparent); }
+
+          .aside { position: relative; overflow: hidden; background: var(--color-accent-2-100); border-radius: calc(2 * var(--radius-lg)); margin: 16px; min-height: 560px; display: flex; flex-direction: column; justify-content: flex-end; padding: clamp(28px, 4vw, 56px); }
+          .blob { position: absolute; border-radius: 50%; display: grid; place-content: center; text-align: center; }
+          .blob p { font-family: var(--font-heading); line-height: 1.15; margin: 0; }
+          .blob-big { right: -120px; top: -140px; width: 420px; height: 420px; background: var(--color-accent-2-300); }
+          .blob-fam { left: 12%; top: 20%; width: 180px; height: 180px; background: var(--color-accent-100); padding: 20px; }
+          .blob-fam p { font-size: 20px; color: var(--color-accent-800); }
+          .blob-ong { left: calc(12% + 150px); top: calc(20% + 130px); width: 150px; height: 150px; background: var(--color-accent-200); padding: 18px; }
+          .blob-ong p { font-size: 18px; color: var(--color-accent-900); }
+          .tagline { position: relative; z-index: 1; max-width: 30ch; }
+          .tagline .big { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: clamp(28px, 3vw, 38px); line-height: 1.15; margin: 0; color: var(--color-accent-2-900); }
+          .tagline .small { font-size: 15px; line-height: 1.6; margin: 16px 0 0; color: var(--color-accent-2-900); }
+     </style>
 </head>
 <body>
-     <form action="/login" method="POST">
-          <label for="email" >Email</label>
-          <input type="email" value="teste1234@gmail.com" name="email">
-          <label for="senha" >Senha</label>
-          <input type="text" value="senha123" name="password">
-          <button type="submit"> logar </button>
-     </form>
-     <br>
-     <form action="/register/user" method="POST">
-          <label for="email">Email</label>
-          <input type="email" value="teste12345@gmail.com" name="email">
-          <label for="senha" >Senha</label>
-          <input type="text" value="senha123" name="password">     
-          <button type="submit"> cadastrar</button>
-     </form>
+<div class="page">
+     <main class="main">
+          <a href="/" class="brand">
+               <span class="brand-mark"></span>
+               <span style="margin-left: 10px;">NutriElo</span>
+          </a>
 
+          <div class="content">
+               <h1 class="title" id="title">Entrar no NutriElo</h1>
+               <p class="lead" id="intro"></p>
 
+               <div class="seg" role="radiogroup" aria-label="Tipo de conta">
+                    <label class="seg-opt"><input type="radio" name="perfil" value="familia" checked><span>Família</span></label>
+                    <label class="seg-opt"><input type="radio" name="perfil" value="instituicao"><span>Instituição</span></label>
+               </div>
 
+               <form id="auth-form" action="/login" method="POST" novalidate>
+                    <div class="field">
+                         <label for="login-id" id="id-label">E-mail</label>
+                         <input id="login-id" class="input" type="email" name="email" autocomplete="username" required>
+                    </div>
+                    <div class="field">
+                         <div class="field-head">
+                              <label for="login-pw" class="field-label">Senha</label>
+                              <a href="#" id="forgot">Esqueci minha senha</a>
+                         </div>
+                         <div class="pw-wrap">
+                              <input id="login-pw" class="input" type="password" name="password" placeholder="Sua senha" autocomplete="current-password" required>
+                              <button type="button" class="btn btn-ghost btn-icon pw-toggle" id="pw-toggle" aria-label="Mostrar senha" aria-pressed="false">
+                                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2.06 12.35a1 1 0 0 1 0-.7 10.75 10.75 0 0 1 19.88 0 1 1 0 0 1 0 .7 10.75 10.75 0 0 1-19.88 0"></path><circle cx="12" cy="12" r="3"></circle><path class="slash" d="m3 3 18 18"></path></svg>
+                              </button>
+                         </div>
+                    </div>
 
-     
+                    <label class="radio remember" id="remember-wrap">
+                         <input type="checkbox" name="remember" value="true" checked>
+                         <span class="dot"></span>
+                         <span>Manter conectado neste aparelho</span>
+                    </label>
+
+                    <p class="msg msg-error" role="alert" id="error" hidden></p>
+                    <p class="msg msg-notice" role="status" id="notice" hidden></p>
+
+                    <button type="submit" class="btn btn-primary btn-block submit" id="submit">Entrar</button>
+               </form>
+
+               <p class="switch" id="switch">
+                    <span id="switch-text">Ainda não tem conta?</span>
+                    <a href="#cadastro" id="switch-link">Cadastre sua família</a>
+               </p>
+          </div>
+
+          <p class="foot">Seus dados são usados apenas para conectar você à rede de apoio.</p>
+     </main>
+
+     <aside class="aside" aria-hidden="true">
+          <div class="blob blob-big"></div>
+          <div class="blob blob-fam"><p>Famílias</p></div>
+          <div class="blob blob-ong"><p>ONGs</p></div>
+          <div class="tagline">
+               <p class="big">Conectando quem precisa a quem pode ajudar.</p>
+               <p class="small">Rede Sustentável de Apoio Familiar</p>
+          </div>
+     </aside>
+</div>
+
+<script>
+(() => {
+     const $ = id => document.getElementById(id);
+     const form = $('auth-form');
+     const emailInput = $('login-id');
+     const pwInput = $('login-pw');
+     const submitBtn = $('submit');
+
+     const state = { profile: 'familia', mode: location.hash === '#cadastro' ? 'register' : 'login' };
+
+     const COPY = {
+          familia: {
+               intro: 'Acompanhe seus pedidos e encontre pontos de distribuição perto de você.',
+               idLabel: 'E-mail',
+               idPh: 'voce@email.com',
+               signup: 'Cadastre sua família',
+          },
+          instituicao: {
+               intro: 'Acesse o painel da sua ONG para atualizar pontos de distribuição e ver as necessidades da região.',
+               idLabel: 'E-mail da instituição',
+               idPh: 'contato@instituicao.org',
+               signup: 'Cadastre sua instituição',
+          },
+     };
+
+     // Traduz as mensagens mais comuns do Supabase Auth.
+     const ERRORS = [
+          [/invalid login credentials/i, 'E-mail ou senha incorretos. Confira e tente novamente.'],
+          [/email not confirmed/i, 'Confirme seu e-mail antes de entrar. Verifique sua caixa de entrada.'],
+          [/already registered|already exists/i, 'Já existe uma conta com este e-mail. Tente entrar.'],
+          [/password should be at least/i, 'A senha precisa ter pelo menos 6 caracteres.'],
+          [/rate limit|too many/i, 'Muitas tentativas. Aguarde um pouco e tente de novo.'],
+          [/invalid.*email|email.*invalid/i, 'Informe um e-mail válido.'],
+     ];
+     const translate = msg => (ERRORS.find(([re]) => re.test(msg || '')) || [, 'Não foi possível concluir. Tente novamente.'])[1];
+
+     function showError(msg) {
+          $('error').textContent = msg;
+          $('error').hidden = !msg;
+          if (msg) $('notice').hidden = true;
+     }
+     function showNotice(msg) {
+          $('notice').textContent = msg;
+          $('notice').hidden = !msg;
+          if (msg) $('error').hidden = true;
+     }
+
+     function render() {
+          const c = COPY[state.profile];
+          const isRegister = state.mode === 'register';
+          $('intro').textContent = c.intro;
+          $('id-label').textContent = c.idLabel;
+          emailInput.placeholder = c.idPh;
+          $('title').textContent = isRegister ? 'Criar conta no NutriElo' : 'Entrar no NutriElo';
+          submitBtn.textContent = isRegister ? 'Cadastrar' : 'Entrar';
+          form.action = isRegister ? '/register/user' : '/login';
+          pwInput.autocomplete = isRegister ? 'new-password' : 'current-password';
+          $('forgot').hidden = isRegister;
+          $('remember-wrap').hidden = isRegister;
+          $('switch-text').textContent = isRegister ? 'Já tem conta?' : 'Ainda não tem conta?';
+          $('switch-link').textContent = isRegister ? 'Entrar' : c.signup;
+          $('switch-link').href = isRegister ? '#' : '#cadastro';
+     }
+
+     document.querySelectorAll('input[name="perfil"]').forEach(r => r.addEventListener('change', () => {
+          state.profile = r.value;
+          showError(''); showNotice('');
+          render();
+     }));
+
+     $('switch-link').addEventListener('click', e => {
+          e.preventDefault();
+          state.mode = state.mode === 'login' ? 'register' : 'login';
+          history.replaceState(null, '', state.mode === 'register' ? '#cadastro' : location.pathname);
+          showError(''); showNotice('');
+          render();
+     });
+
+     $('pw-toggle').addEventListener('click', () => {
+          const show = pwInput.type === 'password';
+          pwInput.type = show ? 'text' : 'password';
+          $('pw-toggle').setAttribute('aria-pressed', String(show));
+          $('pw-toggle').setAttribute('aria-label', show ? 'Ocultar senha' : 'Mostrar senha');
+     });
+
+     $('forgot').addEventListener('click', e => {
+          e.preventDefault();
+          showNotice('A recuperação de senha ainda não está disponível. Fale com a equipe NutriElo para redefinir seu acesso.');
+     });
+
+     [emailInput, pwInput].forEach(i => i.addEventListener('input', () => showError('')));
+
+     form.addEventListener('submit', async e => {
+          e.preventDefault();
+          const email = emailInput.value.trim();
+          const password = pwInput.value;
+          if (!email || !password) return showError('Preencha os dois campos para continuar.');
+          if (!emailInput.checkValidity()) return showError('Informe um e-mail válido.');
+          if (state.mode === 'register' && password.length < 6) return showError('A senha precisa ter pelo menos 6 caracteres.');
+
+          const body = new URLSearchParams({ email, password });
+          if (state.mode === 'login') body.set('remember', form.elements.remember.checked ? 'true' : 'false');
+
+          submitBtn.disabled = true;
+          showError(''); showNotice('');
+          try {
+               // O back-end responde 303 → "/" e grava o cookie access_token.
+               const res = await fetch(form.action, { method: 'POST', body, credentials: 'same-origin' });
+               if (!res.ok) {
+                    let detail = '';
+                    try { detail = (await res.json()).detail; } catch (_) {}
+                    return showError(translate(typeof detail === 'string' ? detail : ''));
+               }
+               // Sem sessão (cadastro aguardando confirmação de e-mail), "/" redireciona de volta para /login.
+               if (new URL(res.url).pathname === '/login') {
+                    state.mode = 'login';
+                    history.replaceState(null, '', location.pathname);
+                    render();
+                    pwInput.value = '';
+                    return showNotice('Conta criada! Enviamos um link de confirmação para ' + email + '. Confirme e depois entre.');
+               }
+               location.href = '/';
+          } catch (_) {
+               showError('Sem conexão com o servidor. Verifique sua internet e tente novamente.');
+          } finally {
+               submitBtn.disabled = false;
+          }
+     });
+
+     render();
+})();
+</script>
 </body>
 </html>

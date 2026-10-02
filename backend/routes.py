@@ -24,7 +24,8 @@ def home(is_authenticated: bool = Depends(verify_authentication)):
 @router.get("/login")
 def login(is_authenticated: bool = Depends(verify_authentication)):
     print(f"\033[44m [REQUEST] Rota Login chamada. Autenticado? {is_authenticated} \033[0m")
-
+    if is_authenticated:
+        return RedirectResponse(url="/", status_code=303)
     return get_login_page()
 
 
@@ -35,9 +36,9 @@ def register(email: str = Form(...), password: str = Form(...)):
 
 
 @router.post("/login")
-def login(email: str = Form(...), password: str = Form(...)):
+def login(email: str = Form(...), password: str = Form(...), remember: bool = Form(True)):
     print("\033[41m ROTA POST DE LOGAR \033[0m")
-    return login_user(email=email, password=password)
+    return login_user(email=email, password=password, remember=remember)
 
 @router.post("/login/logout")
 def logout():

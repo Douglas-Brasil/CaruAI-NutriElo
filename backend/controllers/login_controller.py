@@ -33,7 +33,7 @@ def register_user(email: str, password: str) -> RedirectResponse:
     return response
 
 
-def login_user(email: str, password: str) -> RedirectResponse:
+def login_user(email: str, password: str, remember: bool = True) -> RedirectResponse:
     # 1. Tenta autenticar o usuário no Supabase
     user = User(email=email, password=password)
     result = Login.authenticate(user)  # Ajuste o método conforme sua classe Login
@@ -53,7 +53,8 @@ def login_user(email: str, password: str) -> RedirectResponse:
         key="access_token",
         value=access_token,
         httponly=True,
-        max_age=3600,
+        # Sem "manter conectado" vira cookie de sessão (some ao fechar o navegador)
+        max_age=3600 if remember else None,
         samesite="lax",
         secure=True  # Recomendado em produção com HTTPS
     )
