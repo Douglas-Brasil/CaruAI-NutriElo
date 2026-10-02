@@ -67,14 +67,14 @@ Entre as funcionalidades previstas para o sistema estão:
 O desenvolvimento e acompanhamento das atividades do projeto são realizados através do **Trello**, permitindo organizar tarefas, acompanhar o progresso e dividir as responsabilidades entre os integrantes da equipe.
 
 🔗 **Quadro do projeto:**
-https://trello.com/b/aiCHGfd3/caruai-nutrielo
+https://trello.com/invite/b/6abbc3194362e892d23f7bd4/ATTI13f9bbea039386c8bd65336eda3e0be7D9ADF31A/caruai-nutrielo
 
 ## 👥 Equipe
 
 | Integrante             |
 | ---------------------- |
 | **Douglas Alves**      |
-| **Arthur Vinícius**    |
+| **Arthur Otix**    |
 | **Guilherme Maximino** |
 | **Guilherme Augusto**  |
 | **Vinícius Moura**     |
